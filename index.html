@@ -46,15 +46,27 @@
         <div class="hero-img">
           <img src="./bg_img.jpg" alt="img" />
         </div>
-        <!-- <button class="btn-signup modal-btn">je m'inscris</button> -->
+        <button class="btn-signup modal-btn">je m'inscris</button>
       </div>
 
       <div class="bground">
         <div class="content">
           <span class="close"></span>
+
+          <!--Message de confirmation-->
+          <div class="formConfirmation">
+            <span>Merci ! Votre réservation a été reçue.</span>
+          </div>
+
+          <!--******************************FORM************************************************-->
           <div class="modal-body">
-            <!--******************************FORM************************************************-->
-            <form id="inscription">
+            <form
+              id="inscription"
+              name="reserve"
+              action="index.html"
+              method="get"
+              onsubmit="return validate(this);"
+            >
               <!--Prénom-->
               <div class="formData">
                 <label for="first">Prénom</label><br />
@@ -64,15 +76,10 @@
                   id="first"
                   name="first"
                   minlength="2"
-                  required
                 />
                 <br />
-                <p
-                  class="rrorField"
-                  style="color: red"
-                  id="error-firstname"
-                ></p>
               </div>
+              <p class="errorField" id="error-firstName"></p>
 
               <!--Nom-->
               <div class="formData">
@@ -83,10 +90,9 @@
                   id="last"
                   name="last"
                   minlength="2"
-                  required
                 /><br />
-                <p class="rrorField" style="color: red" id="error-lastname"></p>
               </div>
+              <p class="errorField" id="error-lastName"></p>
 
               <!--Mail-->
               <div class="formData">
@@ -96,11 +102,10 @@
                   type="email"
                   id="email"
                   name="email"
-                  required
                 />
                 <br />
-                <p class="errorField" style="color: red" id="error-email"></p>
               </div>
+              <p class="errorField" id="error-email"></p>
 
               <!--Date de naissance-->
               <div class="formData">
@@ -110,14 +115,9 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  required
                 /><br />
-                <p
-                  class="errorField"
-                  style="color: red"
-                  id="error-birthdate"
-                ></p>
               </div>
+              <p class="errorField" id="error-birthdate"></p>
 
               <!--Quantité-->
               <div class="formData">
@@ -132,10 +132,9 @@
                   name="quantity"
                   min="0"
                   max="99"
-                  required
                 />
-                <p class="errorField" style="color: red" id="tournament"></p>
               </div>
+              <p class="errorField" id="error-tournament"></p>
 
               <!--***Button radio***-->
               <p class="text-label">
@@ -216,6 +215,7 @@
                   Portland</label
                 >
               </div>
+              <p class="errorField" id="error-location"></p>
 
               <!--***checkbox CGU***-->
               <div class="formData">
@@ -223,14 +223,16 @@
                 <input
                   class="checkbox-input"
                   type="checkbox"
+                  name="terms"
                   id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br />
+                <p class="errorField" id="error-terms"></p>
 
                 <!--checkbox-2-->
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
@@ -238,9 +240,10 @@
                   <span class="checkbox-icon"></span>
                   Je Je souhaite être prévenu des prochains évènements.
                 </label>
+
                 <br />
               </div>
-              <span style="color: red" class="errorField" id="error"></span>
+
               <br />
               <input
                 class="submit"
