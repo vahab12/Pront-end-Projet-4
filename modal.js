@@ -14,37 +14,39 @@ const formData = document.querySelectorAll('.formData');
 const modalCloseBtn = document.querySelectorAll('.close');
 const form = document.getElementsByName('reserve');
 
-// launch modal event -événement modal de lancement
+// Lanacement l'événement du modal
 modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 
-// launch modal form - lancer un formulaire modal
+// lancer un formulaire modal
 function launchModal() {
   modalbg.style.display = 'block';
 }
 
-// Close modal form -Fermer le formulaire modal
+//############################ Fermer le modal #################################//
+
+// Fermer le formulaire modal
 function closeModal() {
   modalbg.style.display = 'none';
 }
 
-// Close modal event - Fermer l'événement modal
+//Fermer l'événement modal
 modalCloseBtn[0].addEventListener('click', closeModal);
 
 //############################ Formulaire #################################//
 
-// Keep form data
+// Conserver les données du formulaire
 form[0].addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
-// Check validation of condition provided - Vérifier la validation de la condition fournie
+// Vérifier la validation de la condition fournie
 function checkCondition(condition) {
   if (!condition) return false;
   else return true;
 }
 
-// Send specific error message rather than elementId provided -Envoyer un message d'erreur spécifique plutôt que l'elementId fourni
-// Add aria invalid for use CSS -Ajouter aria invalide pour utilisation CSS
+// Envoyer un message d'erreur spécifique plutôt que "elementId" fourni
+// Ajouter aria invalide pour utilisation CSS
 function getErrorMessage(elementId, message, inputAssociate) {
   if (elementId && message) {
     document.getElementById(elementId).style.display = 'block';
@@ -53,15 +55,15 @@ function getErrorMessage(elementId, message, inputAssociate) {
   } else throw new Error('Missing parameter for handler error message');
 }
 
-//2nd submit, hide a valid field previous invlid -2eme soumission, cacher un champ valide précédent invlid
-// Swich aria invalid to false for use CSS -Remplacez aria invalid par false pour utiliser CSS
+//2nd submit, hide a valid field previous invlid -2eme "submit", cacher un champ valide précédent invlid
+// Remplacez "aria invalid" par "false" pour utiliser CSS
 function hideErrorMessage(elementId, inputAssociate) {
   if (elementId) document.getElementById(elementId).style.display = 'none';
   if (inputAssociate) inputAssociate.setAttribute('aria-invalid', 'false');
 }
 
 //Check after submit form conditon, and call function who show specific message or a valid field
-//Vérifier la condition du formulaire après soumission, et appeler la fonction qui montre un message spécifique ou un champ valide.
+//Vérifier la condition du formulaire après "submit", et appeler la fonction qui montre un message spécifique ou un champ valide.
 function validate(form) {
   //Elements du DOM
   const firstName = document.getElementById('first');
@@ -74,7 +76,6 @@ function validate(form) {
     checkCondition(firstName.value) &&
     checkCondition(firstName.value.length >= 2) &&
     checkCondition(/^[A-Z][a-zA-Z]+$/.test(firstName.value));
-
   firstNameValid
     ? hideErrorMessage('error-firstName', firstName)
     : getErrorMessage(
@@ -88,11 +89,11 @@ function validate(form) {
     checkCondition(lastName.value.length >= 2) &&
     checkCondition(/^[A-Z][a-zA-Z]+$/.test(lastName.value));
   lastNameValid
-    ? hideErrorMessage('error-lastName', form['last'])
+    ? hideErrorMessage('error-lastName', lastName)
     : getErrorMessage(
         'error-lastName',
         'Veuillez entrer minimum 2 caractères.',
-        form['last']
+        lastName
       );
 
   let emailValid =
@@ -109,6 +110,7 @@ function validate(form) {
         birthdate.value
       )
     );
+
   birthdateValid
     ? hideErrorMessage('error-birthdate', birthdate)
     : getErrorMessage(
@@ -118,7 +120,7 @@ function validate(form) {
       );
 
   //isNaN return false if is a number, true if not
-  // si c'est number return true sinon return false
+  // si c'est un nombre return true sinon return false
   let qteTournamentValid =
     checkCondition(quantity.value) &&
     checkCondition(/^[0-9]+$/.test(quantity.value));
@@ -139,4 +141,18 @@ function validate(form) {
   termsValid
     ? hideErrorMessage('error-terms')
     : getErrorMessage('error-terms', 'Veuillez acceptez les CGU.');
+
+  // Vérifier le formulaire de confirmation et afficher un message de confirmation
+  if (
+    firstNameValid &&
+    lastNameValid &&
+    emailValid &&
+    birthdateValid &&
+    qteTournamentValid &&
+    locationValid &&
+    termsValid
+  ) {
+    document.querySelector('.modal-body').style.display = 'none';
+    document.querySelector('.formConfirmation').style.display = 'block';
+  }
 }
