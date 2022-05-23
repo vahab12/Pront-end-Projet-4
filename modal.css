@@ -209,10 +209,10 @@ main {
   animation-duration: var(--modal-duration);
   background: #232323;
   border-radius: 10px;
-  overflow: hidden;
+  /* overflow: hidden;*/
   position: relative;
   color: #fff;
-  padding-top: 10px;
+  /*padding-top: 10px;*/
 }
 
 .modal-body {
@@ -564,6 +564,7 @@ footer {
   background-color: green;
   padding: 3rem 8%;
   margin: 15px auto;
+  border-radius: 10px;
   display: none;
 }
 
