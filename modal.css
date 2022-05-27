@@ -160,7 +160,7 @@ main {
 }
 
 .modal-btn:hover {
-  background: #3876ac;
+  background: green;
 }
 
 .footer {
@@ -568,10 +568,10 @@ footer {
   display: none;
 }
 
-input[aria-invalid='true'] {
-  border: 2px solid #fe142f;
+input[aria-valid='true'] {
+  border: 2px solid green;
 }
 
 input[aria-invalid='false'] {
-  border: 3px solid green;
+  border: 3px solid #fe142f;
 }

@@ -1,3 +1,4 @@
+//function responsive
 function editNav() {
   let x = document.getElementById('myTopnav');
   if (x.className === 'topnav') {
@@ -15,24 +16,20 @@ const form = document.getElementsByName('reserve');
 
 // Lanacement l'événement du modal
 modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
-
 // lancer un formulaire modal
 function launchModal() {
   modalbg.style.display = 'block';
 }
 
-//############################ Fermer le modal #################################//
-
+//############################ Fermer la modal #################################//
 // Fermer le formulaire modal
 function closeModal() {
   modalbg.style.display = 'none';
 }
-
-//Fermer l'événement modal
+//l'événement modal
 modalCloseBtn[0].addEventListener('click', closeModal);
 
 //############################ Formulaire #################################//
-
 // Conserver les données du formulaire
 form[0].addEventListener('submit', (e) => {
   e.preventDefault();
@@ -40,8 +37,11 @@ form[0].addEventListener('submit', (e) => {
 
 // Vérifier la validation de la condition fournie
 function checkCondition(condition) {
-  if (!condition) return false;
-  else return true;
+  if (!condition) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 // Function pour envoyer un message d'erreur spécifique plutôt que "elementId" fourni
@@ -52,15 +52,15 @@ function getErrorMessage(elementId, message, inputAssociate) {
     //prendre l'ID de champ concerné et envoyer le message d'erreur
     document.getElementById(elementId).innerText = message;
     // Ajouter aria invalide pour utilisation CSS
-    if (inputAssociate) inputAssociate.setAttribute('aria-invalid', 'true');
+    if (inputAssociate) inputAssociate.setAttribute('aria-invalid', 'false');
   }
 }
 
 // 2eme "submit", cacher un champ valide précédent invlid
 function hideErrorMessage(elementId, inputAssociate) {
   if (elementId) document.getElementById(elementId).style.display = 'none';
-  // Remplacez "aria invalid" par "false" pour utiliser CSS
-  if (inputAssociate) inputAssociate.setAttribute('aria-invalid', 'false');
+  // Ajouter aria invalide pour utilisation CSS
+  if (inputAssociate) inputAssociate.setAttribute('aria-valid', 'true');
 }
 
 /*Function pour vérifier la condition du formulaire après "submit", 
@@ -89,6 +89,7 @@ function validate(form) {
         'Veuillez entrer minimum 2 caractères.',
         firstName
       );
+
   //Variable
   let lastNameValid =
     //le champ nom doit être rensigner
