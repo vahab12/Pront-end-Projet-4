@@ -8,7 +8,7 @@ function editNav() {
   }
 }
 
-// DOM Elements -Éléments du DOM
+// Éléments du DOM
 const modalbg = document.querySelector('.bground');
 const modalBtn = document.querySelectorAll('.modal-btn');
 const modalCloseBtn = document.querySelectorAll('.close');
@@ -30,6 +30,7 @@ function closeModal() {
 modalCloseBtn[0].addEventListener('click', closeModal);
 
 //############################ Formulaire #################################//
+
 // Conserver les données du formulaire
 form[0].addEventListener('submit', (e) => {
   e.preventDefault();
@@ -44,27 +45,29 @@ function checkCondition(condition) {
   }
 }
 
-// Function pour envoyer un message d'erreur spécifique plutôt que "elementId" fourni
-function getErrorMessage(elementId, message, inputAssociate) {
+// Function pour envoyer un message d'erreur spécifique
+function getErrorMessage(elementId, message, inputNotAssociate) {
   if (elementId && message) {
     //prendre l'ID de champ concerné et afficher le message d'erreur
     document.getElementById(elementId).style.display = 'block';
     //prendre l'ID de champ concerné et envoyer le message d'erreur
     document.getElementById(elementId).innerText = message;
     // Ajouter aria invalide pour utilisation CSS
-    if (inputAssociate) inputAssociate.setAttribute('aria-invalid', 'false');
+    if (inputNotAssociate)
+      inputNotAssociate.setAttribute('aria-invalid', 'false');
   }
 }
 
-// 2eme "submit", cacher un champ valide précédent invlid
+// Cacher un champ valide précédent invlid
 function hideErrorMessage(elementId, inputAssociate) {
   if (elementId) document.getElementById(elementId).style.display = 'none';
   // Ajouter aria invalide pour utilisation CSS
-  if (inputAssociate) inputAssociate.setAttribute('aria-valid', 'true');
+  if (inputAssociate) inputAssociate.setAttribute('aria-invalid', 'true');
 }
 
 /*Function pour vérifier la condition du formulaire après "submit", 
 et appeler la fonction qui montre un message spécifique ou un champ valide.*/
+
 function validate(form) {
   //Elements du DOM
   const firstName = document.getElementById('first');
@@ -78,10 +81,10 @@ function validate(form) {
     checkCondition(firstName.value) &&
     //Au moin deux caractères
     checkCondition(firstName.value.length >= 2) &&
-    //le champ email respect bien la condition de regexp
+    //le champ respect bien la condition de regexp
     checkCondition(/^[A-Z][a-zA-Z]+$/.test(firstName.value));
   firstNameValid
-    ? // Si "false" afficher la message d'erreur sous le champs
+    ? // Si "true" Cacher la message d'erreur sous le champs
       hideErrorMessage('error-firstName', firstName)
     : // Si "false" afficher la message d'erreur sous le champs
       getErrorMessage(
@@ -96,10 +99,10 @@ function validate(form) {
     checkCondition(lastName.value) &&
     //Au moin deux caractères
     checkCondition(lastName.value.length >= 2) &&
-    //le champ email respect bien la condition de regexp
+    //le champ respect bien la condition de regexp
     checkCondition(/^[A-Z][a-zA-Z]+$/.test(lastName.value));
   lastNameValid
-    ? // Si "false" afficher la message d'erreur sous le champs
+    ? // Si "true" Cacher la message d'erreur sous le champs
       hideErrorMessage('error-lastName', lastName)
     : // Si "false" afficher la message d'erreur sous le champs
       getErrorMessage(
@@ -112,10 +115,10 @@ function validate(form) {
   let emailValid =
     //le champ est bien rensigné
     checkCondition(email.value) &&
-    //le champ email respect bien la condition de regexp
+    //le champ respect bien la condition de regexp
     checkCondition(/[A-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(email.value));
   emailValid
-    ? // Si "false" afficher la message d'erreur sous le champs
+    ? // Si "true" Cacher la message d'erreur sous le champs
       hideErrorMessage('error-email', email)
     : // Si "false" afficher la message d'erreur sous le champs
       getErrorMessage('error-email', 'Veuillez entrer un mail valide.', email);
@@ -131,7 +134,7 @@ function validate(form) {
       )
     );
   birthdateValid
-    ? // Si "false" afficher la message d'erreur sous le champs
+    ? // Si "true" Cacher la message d'erreur sous le champs
       hideErrorMessage('error-birthdate', birthdate)
     : // Si "false" afficher la message d'erreur sous le champs
       getErrorMessage(

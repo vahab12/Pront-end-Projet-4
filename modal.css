@@ -8,8 +8,8 @@
   margin: 0;
   padding: 0;
 }
-/* Landing Page */
 
+/* Landing Page */
 body {
   margin: 0;
   display: flex;
@@ -228,9 +228,10 @@ label {
   margin-bottom: 11px;
 }
 input {
-  padding: 8px;
-  border: 0.8px solid #ccc;
   outline: none;
+  font-size: 1.3rem;
+  padding: 15px 23px;
+  border-radius: 15px;
 }
 .text-control {
   margin: 0;
@@ -478,7 +479,6 @@ input {
   text-transform: capitalize;
   font-size: 1.3rem;
   padding: 15px 23px;
-  margin: 0;
   margin-top: 59px;
 }
 .hero-img {
@@ -505,7 +505,8 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-@media screen and (max-width: 800px) {
+/* Reponsive */
+@media screen and (max-width: 1024px) {
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -518,14 +519,14 @@ footer {
   .hero-content::after {
     content: unset;
   }
-  .hero-content .btn-signup {
-    display: none;
-  }
+
   .hero-headline {
+    text-align: center;
     font-size: 4.5rem;
     white-space: normal;
   }
   .hero-text {
+    text-align: center;
     width: unset;
     font-size: 1.5rem;
   }
@@ -568,7 +569,7 @@ footer {
   display: none;
 }
 
-input[aria-valid='true'] {
+input[aria-invalid='true'] {
   border: 2px solid green;
 }
 
